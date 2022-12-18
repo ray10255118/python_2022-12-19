@@ -23,6 +23,14 @@ class Chess(pygame.sprite.Sprite):
         self.rect.y = 35
         self.row = row
         self.col = col
+        
+        self.isback=True
+        self.isclick=False
+        self.size=7
+
+    def isClicked():
+        12
+
 
 
 # region 呼叫物件
