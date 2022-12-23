@@ -1,10 +1,11 @@
 import pygame
+import random
 
 
 class Dots(pygame.sprite.Sprite):
     def __init__(self, col, row):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((5, 5))
+        self.image = pygame.Surface((25, 25))
         self.image.fill((0, 255, 0))
         self.rect = self.image.get_rect()
         self.rect.x = 60
@@ -14,19 +15,23 @@ class Dots(pygame.sprite.Sprite):
 
 
 class Chess(pygame.sprite.Sprite):
-    def __init__(self, col, row):
+    def __init__(self, col, row, size):
+        self.size=size
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(pygame.image.load("images/chess1.png"),(45,45))
+        self.image = pygame.transform.scale(pygame.image.load("images/chess"+str(self.size)+".png"),(45,45))
         self.rect = self.image.get_rect()
         self.row = row
         self.col = col        
         self.rect.x = 35
         self.rect.y = 35
+        
 
         
         self.isback=True
         self.isclick=False
-        self.size=7
+        
+
+        
 
     def isClicked(self):
         self.isclick=True
@@ -54,14 +59,18 @@ for i in range(4):
         dots[i][j].rect.y += 48*i
         all_point.add(dots[i][j])
 
+size1=[1,2,2,3,3,4,4,5,5,6,6,7,7,7,7,7,-1,-2,-2,-3,-3,-4,-4,-5,-5,-6,-6,-7,-7,-7,-7,-7]
+random.shuffle(size1)
+size_num=0
 for i in range(4):
     for j in range(8):
-        chess[i][j] = Chess(j, i)
-        chess[i][j].row=i
-        chess[i][j].col=j
+        chess[i][j] = Chess(j, i,size1[size_num])
+        chess[i][j].row=1
+        chess[i][j].col=1
         chess[i][j].rect.x += 53*j
         chess[i][j].rect.y += 48*i
         all_point.add(chess[i][j])
+        size_num+=1
 
 
 
@@ -91,8 +100,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
-
+        
 
 
 # region 背景畫面
