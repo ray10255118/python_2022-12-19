@@ -34,8 +34,10 @@ class Chess(pygame.sprite.Sprite):
         
 
     def isClicked(self):
-        self.isclick=True
-        self.image=pygame.surface((0,255,0))
+        if pygame.mouse.get_pressed()[0] and chess[0][0].rect.collidepoint(pygame.mouse.get_pos()):
+            print("被点击了「可落子」对象")
+            self.isclick=True
+            self.image=pygame.surface((0,255,0))
 
     def notClicked(self):
         self.isclick=False
@@ -100,7 +102,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        
+        chess[0][0].isClicked()
 
 
 # region 背景畫面
